@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- =======================================================================
+     DetailScreen — cinematic detail view with in-channel video playback.
+     Poster, title, meta, description, and a Play button that launches the
+     built-in Roku Video node (MP4 / HLS).
+     v1.3: serif display title, title-card fallback for poster-less movies,
+     and hardened focus handling after playback ends.
+     ======================================================================= -->
+<component name="DetailScreen" extends="Group" initialFocus="playButton">
+
+    <interface>
+        <field id="itemContent" type="node"    onChange="onItemContentChanged" />
+        <field id="goBack"      type="boolean"  value="false" alwaysNotify="true" />
+        <field id="autoPlay"    type="boolean"  value="false" onChange="onAutoPlay" />
+    </interface>
+
+    <children>
+        <!-- Atmospheric backdrop, heavily darkened -->
+        <Poster id="bgPoster" uri="pkg:/images/home_bg.jpg" width="1920" height="1080" loadDisplayMode="scaleToZoom" />
+        <Rectangle width="1920" height="1080" color="0x0A0A0AF2" />
+
+        <!-- Poster with red border -->
+        <Rectangle width="392" height="582" translation="[106, 146]" color="0x8B0000FF" />
+
+        <!-- Title-card fallback (shown when the movie has no original poster) -->
+        <Group id="detailTitleCard" visible="false" translation="[110, 150]">
+            <Poster id="dtcBg"
+                uri="pkg:/images/titlecard_bg.png"
+                width="384" height="574"
+                loadDisplayMode="scaleToZoom" />
+            <Poster id="dtcGlow"
+                uri="pkg:/images/titlecard_glow.png"
+                width="384" height="574"
+                blendColor="0xC9A25EFF"
+                loadDisplayMode="scaleToZoom" />
+            <Label id="dtcTitle"
+                color="0xE8E4DAFF"
+                maxLines="5" wrap="true"
+                horizAlign="center" vertAlign="center"
+                width="336" height="380"
+                translation="[24, 80]">
+                <Font role="font" uri="pkg:/fonts/PlayfairDisplay.ttf" size="42" />
+            </Label>
+            <Label id="dtcYear"
+                color="0x9A928AFF"
+                horizAlign="center"
+                width="336" height="44"
+                translation="[24, 494]">
+                <Font role="font" uri="pkg:/fonts/PlayfairDisplay.ttf" size="30" />
+            </Label>
+        </Group>
+
+        <Poster id="detailPoster"
+            width="384" height="574"
+            loadDisplayMode="scaleToZoom"
+            translation="[110, 150]" />
+
+        <!-- Title (serif display face) -->
+        <Label id="detailTitle"
+            color="0xFFFFFFFF"
+            maxLines="2" wrap="true"
+            width="1240" height="130"
+            translation="[560, 146]">
+            <Font role="font" uri="pkg:/fonts/PlayfairDisplay.ttf" size="64" />
+        </Label>
+
+        <!-- Meta breadcrumb: year • category -->
+        <Label id="categoryLabel"
+            font="font:SmallBoldSystemFont"
+            color="0xE50914FF"
+            width="1240" height="40"
+            translation="[562, 288]" />
+
+        <!-- Description -->
+        <Label id="detailDescription"
+            font="font:MediumSystemFont"
+            color="0xD6D6D6FF"
+            width="1200" height="280"
+            maxLines="7" wrap="true"
+            translation="[562, 344]" />
+
+        <!-- ▶ Play / Resume button -->
+        <Group id="playButton" translation="[562, 636]">
+            <Rectangle id="playBtnGlow" width="308" height="78" translation="[-4,-4]" color="0xE50914FF" opacity="0.55" />
+            <Rectangle id="playBtnBg" width="300" height="70" color="0xE50914FF" />
+            <Label id="playBtnLabel"
+                text="▶   Play"
+                font="font:MediumBoldSystemFont"
+                color="0xFFFFFFFF"
+                width="300" height="70"
+                horizAlign="center" vertAlign="center" />
+        </Group>
+
+        <!-- ↻ Start Over button (shown only when a resume point exists) -->
+        <Group id="restartButton" translation="[892, 636]" visible="false">
+            <Rectangle id="restartBtnGlow" width="308" height="78" translation="[-4,-4]" color="0xE50914FF" opacity="0.0" />
+            <Rectangle id="restartBtnBg" width="300" height="70" color="0x2E2E2EFF" />
+            <Label id="restartBtnLabel"
+                text="↻   Start Over"
+                font="font:MediumBoldSystemFont"
+                color="0xE0E0E0FF"
+                width="300" height="70"
+                horizAlign="center" vertAlign="center" />
+        </Group>
+
+        <!-- Stream readiness / status -->
+        <Label id="sourceLabel"
+            font="font:SmallSystemFont"
+            color="0x8A8A8AFF"
+            width="1200" height="34"
+            translation="[562, 730]" />
+        <Label id="statusLabel"
+            font="font:SmallSystemFont"
+            color="0xFF6666FF"
+            width="1200" height="120"
+            maxLines="4" wrap="true"
+            translation="[562, 772]"
+            text="" />
+
+        <!-- Nav hint -->
+        <Label id="navHint"
+            text="BACK  Return to browse"
+            font="font:SmallSystemFont"
+            color="0x777777FF"
+            width="700" height="32"
+            translation="[110, 980]" />
+
+        <!-- Full-screen Video player (declared last so it renders on top) -->
+        <Video id="videoPlayer" visible="false" width="1920" height="1080" translation="[0, 0]" enableTrickPlay="true" />
+
+        <!-- Buffering overlay -->
+        <Group id="bufferingOverlay" visible="false">
+            <Rectangle width="1920" height="1080" color="0x000000E6" />
+            <Label id="bufferingLabel"
+                text="Loading video..."
+                font="font:LargeBoldSystemFont"
+                color="0xE50914FF"
+                width="1920" height="1080"
+                horizAlign="center" vertAlign="center" />
+        </Group>
+    </children>
+
+    <script type="text/brightscript" uri="DetailScreen.brs" />
+    <script type="text/brightscript" uri="Bookmarks.brs" />
+    <script type="text/brightscript" uri="PosterPolicy.brs" />
+</component>

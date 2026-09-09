@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- =======================================================================
+     ContentLoader — Task node that fetches the remote JSON feed off the
+     render thread, with a bundled pkg:/feed/feed.json fallback, and builds
+     the ContentNode tree the HomeScreen RowList consumes.
+     ======================================================================= -->
+<component name="ContentLoader" extends="Task">
+    <interface>
+        <field id="feedUrl" type="string" />
+        <field id="content" type="node" />
+        <field id="status"  type="string" />
+        <field id="source"  type="string" />
+    </interface>
+    <script type="text/brightscript" uri="ContentLoader.brs" />
+</component>

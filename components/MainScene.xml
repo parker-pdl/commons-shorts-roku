@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- =======================================================================
+     MainScene — root SceneGraph scene.
+     Orchestrates screen transitions: SplashScreen -> IntroVideo -> HomeScreen
+     -> DetailScreen and kicks off the remote content feed load via a
+     ContentLoader Task.
+     v1.3: plays a full-screen intro bumper video on launch (skippable with
+     OK / Back / Play; auto-skipped on stream error and for deep links).
+     ======================================================================= -->
+<component name="MainScene" extends="Scene" initialFocus="splashScreen">
+
+    <interface>
+        <field id="deepLinkContentId" type="string" />
+        <field id="deepLinkMediaType" type="string" />
+    </interface>
+
+    <children>
+        <SplashScreen  id="splashScreen"  visible="true"  />
+        <HomeScreen    id="homeScreen"    visible="false" />
+        <DetailScreen  id="detailScreen"  visible="false" />
+
+        <!-- Launch bumper (declared last so it renders above the splash) -->
+        <Rectangle id="introBacking" visible="false" width="1920" height="1080" color="0x000000FF" />
+        <Video id="introPlayer" visible="false" width="1920" height="1080" translation="[0, 0]" enableUI="false" />
+    </children>
+
+    <script type="text/brightscript" uri="MainScene.brs" />
+    <script type="text/brightscript" uri="Bookmarks.brs" />
+</component>

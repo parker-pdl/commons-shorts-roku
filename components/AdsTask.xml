@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- =======================================================================
+     AdsTask — runs the Roku Advertising Framework (RAF) on a task thread.
+     Fetches and renders a pre-roll ad pod before content playback.
+     adResult: true  = ads watched (or none available) -> start the movie
+               false = viewer exited during the ad     -> back to detail
+     ======================================================================= -->
+<component name="AdsTask" extends="Task">
+    <interface>
+        <field id="skipAds"  type="boolean" value="false" />
+        <field id="adResult" type="boolean" value="true" alwaysNotify="true" />
+    </interface>
+    <script type="text/brightscript" uri="AdsTask.brs" />
+</component>

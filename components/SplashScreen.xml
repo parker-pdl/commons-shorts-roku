@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- =======================================================================
+     SplashScreen — branded welcome with an atmospheric backdrop and an
+     animated reveal. Auto-advances after ~3.5 s or on OK / Back.
+     ======================================================================= -->
+<component name="SplashScreen" extends="Group">
+
+    <interface>
+        <field id="splashComplete" type="boolean" value="false" alwaysNotify="true" />
+    </interface>
+
+    <children>
+        <Rectangle id="bgRect" width="1920" height="1080" color="0x000000FF" />
+
+        <!-- Atmospheric backdrop, fades in -->
+        <Poster id="openingImage"
+            uri="pkg:/images/splash_bg.jpg"
+            width="1920" height="1080"
+            loadDisplayMode="scaleToZoom"
+            opacity="0.0" />
+
+        <!-- Darkening scrim so the title pops -->
+        <Rectangle width="1920" height="1080" color="0x00000066" />
+
+        <!-- Parker Data Link logo (fades in with the title) -->
+        <Poster id="pdlLogo"
+            uri="pkg:/images/pdl_logo.png"
+            width="500" height="479"
+            translation="[710, 175]"
+            opacity="0.0" />
+
+        <!-- Title (sits below the ghost artwork) -->
+        <Label id="welcomeLabel"
+            text="FREE CLASSIC MOVIES &amp; TV"
+            color="0xD9D4CCFF"
+            horizAlign="center" vertAlign="center"
+            width="1920" height="96"
+            translation="[0, 780]"
+            opacity="0.0">
+            <Font role="font" uri="pkg:/fonts/PlayfairDisplay.ttf" size="68" />
+        </Label>
+
+        <!-- Byline -->
+        <Label id="bylineLabel"
+            text="BY: PARKERDATALINK.COM"
+            font="font:SmallBoldSystemFont"
+            color="0xB0343CFF"
+            horizAlign="center" vertAlign="center"
+            width="1920" height="44"
+            translation="[0, 916]"
+            opacity="0.0" />
+
+        <!-- Red glow accent line under the title -->
+        <Rectangle id="glowLine"
+            width="0" height="3"
+            color="0xE50914FF"
+            translation="[960, 894]" />
+
+        <!-- Animations -->
+        <Animation id="imageReveal" duration="1.4" repeat="false" easeFunction="inOutCubic">
+            <FloatFieldInterpolator fieldToInterp="openingImage.opacity" key="[0.0, 1.0]" keyValue="[0.0, 1.0]" />
+        </Animation>
+
+        <Animation id="textFadeIn" duration="1.2" repeat="false" delay="0.6" easeFunction="inOutCubic">
+            <FloatFieldInterpolator fieldToInterp="welcomeLabel.opacity" key="[0.0, 1.0]" keyValue="[0.0, 1.0]" />
+            <FloatFieldInterpolator fieldToInterp="pdlLogo.opacity" key="[0.0, 1.0]" keyValue="[0.0, 1.0]" />
+            <FloatFieldInterpolator fieldToInterp="bylineLabel.opacity"  key="[0.0, 1.0]" keyValue="[0.0, 1.0]" />
+        </Animation>
+
+        <Animation id="glowExpand" duration="1.4" repeat="false" delay="0.9" easeFunction="inOutCubic">
+            <Vector2DFieldInterpolator fieldToInterp="glowLine.translation" key="[0.0, 1.0]" keyValue="[[960, 894], [560, 894]]" />
+            <FloatFieldInterpolator fieldToInterp="glowLine.width" key="[0.0, 1.0]" keyValue="[0.0, 800.0]" />
+        </Animation>
+
+        <Timer id="splashTimer" duration="3.5" repeat="false" />
+    </children>
+
+    <script type="text/brightscript" uri="SplashScreen.brs" />
+</component>

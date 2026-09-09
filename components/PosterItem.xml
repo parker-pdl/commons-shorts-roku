@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- =======================================================================
+     PosterItem — portrait poster card used by the HomeScreen RowList.
+     Fills a 2:3 poster, scales up on focus with a red glow border, and
+     reveals the title beneath only when focused (Netflix-style).
+     v1.3: when a title has no original poster (missing URL or failed load),
+     the card renders as a styled "title card" — serif title + year over a
+     dark card with a soft category-tinted glow (Browse-the-Vault style).
+     ======================================================================= -->
+<component name="PosterItem" extends="Group">
+
+    <interface>
+        <field id="itemContent"  type="node"  onChange="onItemContentChanged" />
+        <field id="focusPercent" type="float" onChange="onFocusChanged" />
+    </interface>
+
+    <children>
+        <!-- Red glow border (revealed on focus) -->
+        <Rectangle id="focusBorder"
+            width="208" height="308"
+            translation="[-4, -4]"
+            color="0xE50914FF"
+            opacity="0.0" />
+
+        <!-- Card backing -->
+        <Rectangle id="cardBg" width="200" height="300" color="0x141414FF" />
+
+        <!-- ── Title-card fallback (shown only when no poster art exists) ── -->
+        <Group id="titleCard" visible="false">
+            <Poster id="tcBg"
+                uri="pkg:/images/titlecard_bg.png"
+                width="200" height="300"
+                loadDisplayMode="scaleToZoom" />
+            <Poster id="tcGlow"
+                uri="pkg:/images/titlecard_glow.png"
+                width="200" height="300"
+                blendColor="0xC9A25EFF"
+                loadDisplayMode="scaleToZoom" />
+            <Label id="tcTitle"
+                color="0xE8E4DAFF"
+                maxLines="4" wrap="true"
+                horizAlign="center" vertAlign="center"
+                width="176" height="200"
+                translation="[12, 42]">
+                <Font role="font" uri="pkg:/fonts/PlayfairDisplay.ttf" size="23" />
+            </Label>
+            <Label id="tcYear"
+                color="0x9A928AFF"
+                horizAlign="center"
+                width="176" height="26"
+                translation="[12, 258]">
+                <Font role="font" uri="pkg:/fonts/PlayfairDisplay.ttf" size="18" />
+            </Label>
+        </Group>
+
+        <!-- Poster art (fills the card; hidden when the title card is active) -->
+        <Poster id="posterImage"
+            width="200" height="300"
+            loadDisplayMode="scaleToZoom" />
+
+        <!-- Bottom gradient + title strip shown on focus -->
+        <Rectangle id="titleScrim" width="200" height="80" translation="[0, 220]" color="0x000000CC" opacity="0.0" />
+        <Label id="titleLabel"
+            font="font:SmallBoldSystemFont"
+            color="0xFFFFFFFF"
+            maxLines="2" wrap="true"
+            horizAlign="center"
+            width="192" height="70"
+            translation="[4, 232]"
+            opacity="0.0" />
+    </children>
+
+    <script type="text/brightscript" uri="PosterItem.brs" />
+    <script type="text/brightscript" uri="PosterPolicy.brs" />
+</component>

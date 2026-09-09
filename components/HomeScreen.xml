@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- =======================================================================
+     HomeScreen — Netflix-style browse screen (overscan-safe layout).
+     All content kept inside the Roku title-safe area (~96px side / ~60px
+     top-bottom margins) so nothing is clipped by TV overscan.
+     v1.3: refreshed branding (serif display type, Browse-the-Vault header),
+     fixed vertical scrolling (fixedFocus keeps the active row fully on
+     screen), and a title-card fallback for the spotlight hero poster.
+     ======================================================================= -->
+<component name="HomeScreen" extends="Group" initialFocus="rowList">
+
+    <interface>
+        <field id="content"      type="node" onChange="onContentChanged" />
+        <field id="itemSelected" type="node" alwaysNotify="true" />
+    </interface>
+
+    <children>
+        <!-- Full-bleed atmospheric backdrop (safe to reach edges) -->
+        <Poster id="bgPoster"
+            uri="pkg:/images/home_bg.jpg"
+            width="1920" height="1080"
+            loadDisplayMode="scaleToZoom" />
+        <Rectangle width="1920" height="1080" color="0x0A0A0A33" />
+        <Rectangle width="1920" height="600" translation="[0, 480]" color="0x0A0A0ACC" />
+
+        <!-- ── Branding (top-left, inside safe area) ───────────────────────── -->
+        <Rectangle width="14" height="14" color="0xE50914FF" rotation="0.785398" translation="[104, 78]" />
+        <Label id="channelTitle"
+            text="FREE CLASSIC MOVIES &amp; TV"
+            color="0xD9D4CCFF"
+            horizAlign="left"
+            width="1150" height="56"
+            translation="[132, 60]">
+            <Font role="font" uri="pkg:/fonts/PlayfairDisplay.ttf" size="42" />
+        </Label>
+        <Label id="bylineLabel"
+            text="BY: PARKERDATALINK.COM"
+            font="font:SmallBoldSystemFont"
+            color="0xB0343CFF"
+            horizAlign="left"
+            width="700" height="34"
+            translation="[134, 122]" />
+        <Rectangle width="330" height="2" color="0x8B0000FF" translation="[134, 160]" />
+
+        <!-- ── Spotlight hero (reflects the focused item) ──────────────────── -->
+        <Group id="heroCardGroup" visible="false" translation="[1500, 140]">
+            <Poster id="hcBg"
+                uri="pkg:/images/titlecard_bg.png"
+                width="232" height="348"
+                loadDisplayMode="scaleToZoom" />
+            <Poster id="hcGlow"
+                uri="pkg:/images/titlecard_glow.png"
+                width="232" height="348"
+                blendColor="0xC9A25EFF"
+                loadDisplayMode="scaleToZoom" />
+            <Label id="hcTitle"
+                color="0xE8E4DAFF"
+                maxLines="4" wrap="true"
+                horizAlign="center" vertAlign="center"
+                width="204" height="230"
+                translation="[14, 50]">
+                <Font role="font" uri="pkg:/fonts/PlayfairDisplay.ttf" size="27" />
+            </Label>
+            <Label id="hcYear"
+                color="0x9A928AFF"
+                horizAlign="center"
+                width="204" height="30"
+                translation="[14, 300]">
+                <Font role="font" uri="pkg:/fonts/PlayfairDisplay.ttf" size="21" />
+            </Label>
+        </Group>
+        <Poster id="heroPoster"
+            width="232" height="348"
+            loadDisplayMode="scaleToZoom"
+            translation="[1500, 140]" />
+
+        <Label id="heroTitle"
+            color="0xFFFFFFFF"
+            maxLines="2" wrap="true"
+            width="1160" height="96"
+            translation="[100, 210]">
+            <Font role="font" uri="pkg:/fonts/PlayfairDisplay.ttf" size="58" />
+        </Label>
+        <Label id="heroMeta"
+            font="font:SmallBoldSystemFont"
+            color="0xE50914FF"
+            width="1000" height="34"
+            translation="[102, 320]" />
+        <Label id="heroDesc"
+            font="font:MediumSystemFont"
+            color="0xD6D6D6FF"
+            maxLines="2" wrap="true"
+            width="1150" height="74"
+            translation="[102, 362]" />
+        <Label id="heroHint"
+            text="OK  ▶ Play      ◀ ▶ ▲ ▼  Browse"
+            font="font:SmallSystemFont"
+            color="0x9A9A9AFF"
+            width="1000" height="32"
+            translation="[102, 452]" />
+
+        <!-- ── Category rows ───────────────────────────────────────────────────
+             fixedFocus keeps the focused row pinned at the top of the list
+             viewport, always fully visible — floatingFocus could leave the
+             active row half clipped at the bottom of the screen (v1.2 bug). -->
+        <RowList id="rowList"
+            translation="[100, 512]"
+            itemSize="[1700, 338]"
+            rowItemSize="[[200, 300]]"
+            numRows="2"
+            itemSpacing="[0, 28]"
+            rowItemSpacing="[[22, 0]]"
+            showRowLabel="true"
+            rowLabelOffset="[[0, 4]]"
+            rowLabelFont="font:MediumBoldSystemFont"
+            rowLabelColor="0xF2F2F2FF"
+            drawFocusFeedback="false"
+            rowFocusAnimationStyle="fixedFocusWrap"
+            vertFocusAnimationStyle="fixedFocus"
+            itemComponentName="PosterItem" />
+    </children>
+
+    <script type="text/brightscript" uri="HomeScreen.brs" />
+    <script type="text/brightscript" uri="PosterPolicy.brs" />
+</component>
