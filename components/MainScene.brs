@@ -15,7 +15,7 @@
 ' Where the channel pulls its catalogue from. Editing feed/feed.json in the repo
 ' updates the channel without a rebuild.
 function FEED_URL() as string
-    return ""   ' bundled feed for v1.0 — point at a GitHub raw URL when the repo exists
+    return "https://raw.githubusercontent.com/parker-pdl/commons-shorts-roku/master/feed/feed.json"
 end function
 
 ' Launch bumper played once on startup (skippable).
