@@ -31,8 +31,8 @@
 
         <!-- Title (sits below the ghost artwork) -->
         <Label id="welcomeLabel"
-            text="FREE CLASSIC MOVIES &amp; TV"
-            color="0xD9D4CCFF"
+            text="WIKI COMMON GROUNDS"
+            color="0xFFFAEEFF"
             horizAlign="center" vertAlign="center"
             width="1920" height="96"
             translation="[0, 780]"
@@ -44,7 +44,7 @@
         <Label id="bylineLabel"
             text="BY: PARKERDATALINK.COM"
             font="font:SmallBoldSystemFont"
-            color="0xB0343CFF"
+            color="0xE7B24BFF"
             horizAlign="center" vertAlign="center"
             width="1920" height="44"
             translation="[0, 916]"
@@ -53,7 +53,7 @@
         <!-- Red glow accent line under the title -->
         <Rectangle id="glowLine"
             width="0" height="3"
-            color="0xE50914FF"
+            color="0xE7B24BFF"
             translation="[960, 894]" />
 
         <!-- Animations -->

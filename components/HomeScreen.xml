@@ -24,9 +24,9 @@
         <Rectangle width="1920" height="600" translation="[0, 480]" color="0x0A0A0ACC" />
 
         <!-- ── Branding (top-left, inside safe area) ───────────────────────── -->
-        <Rectangle width="14" height="14" color="0xE50914FF" rotation="0.785398" translation="[104, 78]" />
+        <Rectangle width="14" height="14" color="0xE7B24BFF" rotation="0.785398" translation="[104, 78]" />
         <Label id="channelTitle"
-            text="FREE CLASSIC MOVIES &amp; TV"
+            text="WIKI COMMON GROUNDS"
             color="0xD9D4CCFF"
             horizAlign="left"
             width="1150" height="56"
@@ -36,7 +36,7 @@
         <Label id="bylineLabel"
             text="BY: PARKERDATALINK.COM"
             font="font:SmallBoldSystemFont"
-            color="0xB0343CFF"
+            color="0xE7B24BFF"
             horizAlign="left"
             width="700" height="34"
             translation="[134, 122]" />
@@ -83,7 +83,7 @@
         </Label>
         <Label id="heroMeta"
             font="font:SmallBoldSystemFont"
-            color="0xE50914FF"
+            color="0xE7B24BFF"
             width="1000" height="34"
             translation="[102, 320]" />
         <Label id="heroDesc"

@@ -366,7 +366,7 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
                 else
                     m.playBtnBg.color = "0xB0060FFF"
                     playVideo()
-                    m.playBtnBg.color = "0xE50914FF"
+                    m.playBtnBg.color = "0xE7B24BFF"
                 end if
                 return true
             end if

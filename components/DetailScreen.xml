@@ -67,7 +67,7 @@
         <!-- Meta breadcrumb: year • category -->
         <Label id="categoryLabel"
             font="font:SmallBoldSystemFont"
-            color="0xE50914FF"
+            color="0xE7B24BFF"
             width="1240" height="40"
             translation="[562, 288]" />
 
@@ -81,8 +81,8 @@
 
         <!-- ▶ Play / Resume button -->
         <Group id="playButton" translation="[562, 636]">
-            <Rectangle id="playBtnGlow" width="308" height="78" translation="[-4,-4]" color="0xE50914FF" opacity="0.55" />
-            <Rectangle id="playBtnBg" width="300" height="70" color="0xE50914FF" />
+            <Rectangle id="playBtnGlow" width="308" height="78" translation="[-4,-4]" color="0xE7B24BFF" opacity="0.55" />
+            <Rectangle id="playBtnBg" width="300" height="70" color="0xE7B24BFF" />
             <Label id="playBtnLabel"
                 text="▶   Play"
                 font="font:MediumBoldSystemFont"
@@ -93,7 +93,7 @@
 
         <!-- ↻ Start Over button (shown only when a resume point exists) -->
         <Group id="restartButton" translation="[892, 636]" visible="false">
-            <Rectangle id="restartBtnGlow" width="308" height="78" translation="[-4,-4]" color="0xE50914FF" opacity="0.0" />
+            <Rectangle id="restartBtnGlow" width="308" height="78" translation="[-4,-4]" color="0xE7B24BFF" opacity="0.0" />
             <Rectangle id="restartBtnBg" width="300" height="70" color="0x2E2E2EFF" />
             <Label id="restartBtnLabel"
                 text="↻   Start Over"
@@ -134,7 +134,7 @@
             <Label id="bufferingLabel"
                 text="Loading video..."
                 font="font:LargeBoldSystemFont"
-                color="0xE50914FF"
+                color="0xE7B24BFF"
                 width="1920" height="1080"
                 horizAlign="center" vertAlign="center" />
         </Group>

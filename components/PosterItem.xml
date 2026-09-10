@@ -19,7 +19,7 @@
         <Rectangle id="focusBorder"
             width="208" height="308"
             translation="[-4, -4]"
-            color="0xE50914FF"
+            color="0xE7B24BFF"
             opacity="0.0" />
 
         <!-- Card backing -->
