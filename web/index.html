@@ -67,6 +67,30 @@
   #pback{position:absolute;top:20px;right:28px;z-index:3;background:rgba(0,0,0,.55);
     border:1px solid rgba(255,255,255,.3);color:#fff;font-size:14px;border-radius:8px;padding:9px 16px;cursor:pointer}
   .hint{padding:4px 40px 0;color:#6f6a62;font-size:12px}
+
+  /* support / tip jar */
+  .supportBtn{margin-left:14px;flex:0 0 auto;background:linear-gradient(135deg,#e0563f,#a8281a);color:#fff;border:2px solid transparent;
+    border-radius:10px;padding:9px 14px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;outline:none;
+    box-shadow:0 4px 16px rgba(192,57,43,.35);transition:transform .14s,border-color .14s}
+  .supportBtn:focus,.supportBtn:hover{transform:translateY(-2px);border-color:var(--focus)}
+  #support{position:fixed;inset:0;background:rgba(6,6,8,.94);z-index:50;display:none;align-items:center;justify-content:center;padding:24px}
+  #support.show{display:flex}
+  .sBox{max-width:1180px;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:34px 40px;
+    display:flex;gap:36px;align-items:center;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+  .sText{flex:1 1 auto;min-width:0}
+  .sText h2{margin:0 0 6px;font-size:28px}
+  .sText .intro{color:var(--dim);font-size:14px;margin:0 0 18px;line-height:1.5}
+  .sText p{font-size:17px;line-height:1.55;margin:0 0 22px;color:#efe9dd}
+  .sLink{display:inline-block;background:linear-gradient(135deg,#e0563f,#a8281a);color:#fff;text-decoration:none;font-weight:800;
+    font-size:18px;padding:14px 22px;border-radius:12px;border:2px solid transparent;outline:none;box-shadow:0 6px 20px rgba(192,57,43,.4)}
+  .sLink:focus,.sLink:hover{border-color:var(--focus);transform:translateY(-2px)}
+  .sClose{display:inline-block;margin-left:14px;background:transparent;color:var(--dim);border:2px solid var(--line);border-radius:12px;
+    padding:14px 18px;font-size:15px;cursor:pointer;font-family:inherit;outline:none}
+  .sClose:focus,.sClose:hover{border-color:var(--focus);color:#fff}
+  .sQR{flex:0 0 auto;text-align:center;color:var(--dim);font-size:13px}
+  .sQR img{width:230px;height:230px;border-radius:12px;background:#fff;padding:8px;display:block;margin:0 auto 10px}
+  .sQR b{color:#efe9dd;display:block;font-size:14px;margin-bottom:2px}
+  @media (max-width:820px){ .sBox{flex-direction:column;padding:26px} .sQR img{width:180px;height:180px} }
 </style>
 </head>
 <body>
@@ -78,12 +102,30 @@
       <p>Free public-domain &amp; Creative Commons short films</p>
     </div>
     <div class="count" id="count"></div>
+    <button class="supportBtn" id="supportBtn">&#9749; Support</button>
   </header>
   <div class="hint" id="hint">Use the arrow keys to browse &middot; OK/Enter to play &middot; Back to return</div>
   <main id="rows"></main>
 </div>
 
 <div id="status"><div class="spin"></div><div id="statusText">Loading the vault&hellip;</div></div>
+
+<div id="support">
+  <div class="sBox">
+    <div class="sText">
+      <h2>&#9749; Support the channel</h2>
+      <p class="intro">A fan-made site from Parker Data Link &mdash; free classic public-domain films, horror-franchise tributes, games, and more. Made by fans, for fans.</p>
+      <p>Love the free films? Parker Data Link keeps classic public-domain movies and shorts streaming free for everyone &mdash; plus several themed apps on Google Play and Amazon, and, of course, fan-made websites like this one. If it brings you joy, drop a little in the jar to help keep it running. Every bit helps &mdash; thank you!</p>
+      <a class="sLink" id="supportLink" href="https://www.paypal.com/ncp/payment/XN3AVSS9R28KS" target="_blank" rel="noopener">&#9749; Support the channel &rarr;</a>
+      <button class="sClose" id="supportClose">&#8592; Back to films</button>
+    </div>
+    <div class="sQR">
+      <img alt="Scan to tip via PayPal" src="data:image/png;base64,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">
+      <b>On a TV? Scan with your phone.</b>
+      PayPal &middot; Venmo &middot; card &mdash; any amount
+    </div>
+  </div>
+</div>
 
 <div id="player">
   <div id="ptitle"><b id="pt"></b><span id="ps"></span></div>
@@ -197,6 +239,14 @@
     videoEl.removeAttribute('src'); videoEl.load();
     focusCard(cur.r,cur.c);
   }
+
+  // ---- support / tip jar ----
+  var supportEl=document.getElementById('support'), supportBtn=document.getElementById('supportBtn'),
+      supportLink=document.getElementById('supportLink'), supportClose=document.getElementById('supportClose');
+  function openSupport(){ supportEl.classList.add('show'); supportLink.focus(); }
+  function closeSupport(){ supportEl.classList.remove('show'); supportBtn.focus(); }
+  supportBtn.addEventListener('click',openSupport);
+  supportClose.addEventListener('click',closeSupport);
   document.getElementById('pback').addEventListener('click',closePlayer);
   videoEl.addEventListener('ended',closePlayer);
 
@@ -207,13 +257,27 @@
     // Back / Escape
     if(k===461 || k===27 || k===8 || key==='GoBack' || key==='Backspace' || key==='Escape'){
       if(playerOpen){ e.preventDefault(); closePlayer(); }
+      else if(supportEl.classList.contains('show')){ e.preventDefault(); closeSupport(); }
       return;
     }
     if(playerOpen) return; // let the video controls handle the rest
+    // support overlay open: Left/Right toggles between the link and Back, Enter activates
+    if(supportEl.classList.contains('show')){
+      if(key==='ArrowRight'||k===39||key==='ArrowLeft'||k===37){ e.preventDefault();
+        (document.activeElement===supportLink?supportClose:supportLink).focus(); }
+      else if(key==='Enter'||k===13){ if(document.activeElement===supportClose){ e.preventDefault(); closeSupport(); } }
+      return;
+    }
+    // header support button focused: Down goes back to the films
+    if(document.activeElement===supportBtn){
+      if(key==='ArrowDown'||k===40){ e.preventDefault(); focusCard(cur.r,cur.c); }
+      else if(key==='Enter'||k===13){ e.preventDefault(); openSupport(); }
+      return;
+    }
     if(key==='ArrowRight'||k===39){ e.preventDefault(); move(0,1); }
     else if(key==='ArrowLeft'||k===37){ e.preventDefault(); move(0,-1); }
     else if(key==='ArrowDown'||k===40){ e.preventDefault(); move(1,0); }
-    else if(key==='ArrowUp'||k===38){ e.preventDefault(); move(-1,0); }
+    else if(key==='ArrowUp'||k===38){ e.preventDefault(); if(cur.r===0){ supportBtn.focus(); } else { move(-1,0); } }
     else if(key==='Enter'||k===13){ var el=rowsData[cur.r]&&rowsData[cur.r][cur.c]; if(el){e.preventDefault();el.click();} }
   });
 
