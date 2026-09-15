@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Common Grounds — Free Short Films</title>
+<style>
+  :root{
+    --bg:#0b0b0d; --bg2:#141418; --panel:#1b1b21; --line:#2a2a33;
+    --ink:#f4f1ea; --dim:#a9a39a; --accent:#c0392b; --accent2:#e0563f;
+    --focus:#ffcf6b; --card:#20202a;
+    --safe: env(safe-area-inset-top,0px);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);
+    font-family:"Segoe UI",Roboto,-apple-system,Helvetica,Arial,sans-serif;overflow:hidden}
+  #app{height:100vh;display:flex;flex-direction:column}
+  /* header */
+  header{display:flex;align-items:center;gap:16px;padding:22px 40px 12px;flex:0 0 auto}
+  .logo{width:46px;height:46px;border-radius:11px;flex:0 0 auto;
+    background:radial-gradient(circle at 30% 25%,#e0563f,#7a1c12 70%);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;
+    color:#fff;box-shadow:0 4px 18px rgba(192,57,43,.4)}
+  .brand h1{margin:0;font-size:26px;letter-spacing:.5px;font-weight:800}
+  .brand p{margin:2px 0 0;font-size:13px;color:var(--dim);letter-spacing:.3px}
+  .count{margin-left:auto;font-size:12px;color:var(--dim);text-align:right;line-height:1.5}
+  /* rows */
+  main{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;padding:6px 0 60px;scrollbar-width:none}
+  main::-webkit-scrollbar{display:none}
+  .row{margin:22px 0}
+  .row h2{margin:0 0 12px 40px;font-size:18px;font-weight:700;color:#efe9dd;letter-spacing:.4px}
+  .strip{display:flex;gap:16px;padding:6px 40px 10px;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none}
+  .strip::-webkit-scrollbar{display:none}
+  .card{flex:0 0 auto;width:230px;cursor:pointer;outline:none;border:none;background:transparent;
+    padding:0;text-align:left;font-family:inherit;color:inherit}
+  .thumb{width:230px;height:130px;border-radius:12px;position:relative;overflow:hidden;
+    border:2px solid transparent;transition:transform .14s ease,border-color .14s ease,box-shadow .14s ease;
+    display:flex;align-items:flex-end;padding:12px;background:var(--card)}
+  .thumb .t{font-size:15px;font-weight:700;line-height:1.25;text-shadow:0 2px 8px rgba(0,0,0,.7);
+    max-height:78px;overflow:hidden;position:relative;z-index:2}
+  .thumb .badge{position:absolute;top:9px;left:9px;z-index:2;font-size:11px;font-weight:700;
+    background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.18);padding:3px 7px;border-radius:6px;color:#fff}
+  .thumb .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.8);z-index:3;
+    width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.55);border:2px solid #fff;
+    display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .14s,transform .14s}
+  .thumb::after{content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(160deg,rgba(0,0,0,.05),rgba(0,0,0,.55))}
+  .meta{margin:8px 2px 0;font-size:12px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .card:focus .thumb,.card:hover .thumb{transform:translateY(-4px);border-color:var(--focus);
+    box-shadow:0 10px 30px rgba(0,0,0,.55)}
+  .card:focus .thumb .play,.card:hover .thumb .play{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  /* loading / error */
+  #status{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:14px;color:var(--dim);z-index:5}
+  #status .spin{width:44px;height:44px;border-radius:50%;border:4px solid #2a2a33;border-top-color:var(--accent2);
+    animation:spin 1s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  #status.hide{display:none}
+  /* player */
+  #player{position:fixed;inset:0;background:#000;z-index:40;display:none;flex-direction:column}
+  #player.show{display:flex}
+  #player video{width:100%;height:100%;background:#000;object-fit:contain}
+  #ptitle{position:absolute;top:0;left:0;right:0;padding:22px 40px calc(22px + var(--safe));
+    background:linear-gradient(180deg,rgba(0,0,0,.8),transparent);z-index:2;pointer-events:none}
+  #ptitle b{font-size:22px;display:block}
+  #ptitle span{font-size:13px;color:var(--dim)}
+  #pback{position:absolute;top:20px;right:28px;z-index:3;background:rgba(0,0,0,.55);
+    border:1px solid rgba(255,255,255,.3);color:#fff;font-size:14px;border-radius:8px;padding:9px 16px;cursor:pointer}
+  .hint{padding:4px 40px 0;color:#6f6a62;font-size:12px}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="logo">CG</div>
+    <div class="brand">
+      <h1>Common Grounds</h1>
+      <p>Free public-domain &amp; Creative Commons short films</p>
+    </div>
+    <div class="count" id="count"></div>
+  </header>
+  <div class="hint" id="hint">Use the arrow keys to browse &middot; OK/Enter to play &middot; Back to return</div>
+  <main id="rows"></main>
+</div>
+
+<div id="status"><div class="spin"></div><div id="statusText">Loading the vault&hellip;</div></div>
+
+<div id="player">
+  <div id="ptitle"><b id="pt"></b><span id="ps"></span></div>
+  <button id="pback">&#8592; Back</button>
+  <video id="video" controls playsinline preload="metadata"></video>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var FEED_URL = "https://commons-shorts-feed.parkerdatalinktv.workers.dev";
+  var rowsEl = document.getElementById('rows');
+  var statusEl = document.getElementById('status');
+  var statusText = document.getElementById('statusText');
+  var countEl = document.getElementById('count');
+  var playerEl = document.getElementById('player');
+  var videoEl = document.getElementById('video');
+  var ptEl = document.getElementById('pt'), psEl = document.getElementById('ps');
+
+  // deterministic color per title (for the title-card thumbnails, since the feed has no posters)
+  var PALS = [
+    ['#3a1c71','#d76d77'],['#134e5e','#71b280'],['#4b1248','#f0c27b'],
+    ['#232526','#414345'],['#42275a','#734b6d'],['#1f4037','#99f2c8'],
+    ['#5c258d','#4389a2'],['#2c3e50','#c0392b'],['#333333','#dd1818'],
+    ['#0f2027','#2c5364'],['#41295a','#2f0743'],['#603813','#b29f94']
+  ];
+  function hash(s){var h=0;for(var i=0;i<s.length;i++){h=(h<<5)-h+s.charCodeAt(i);h|=0;}return Math.abs(h);}
+  function grad(title){var p=PALS[hash(title)%PALS.length];
+    return 'linear-gradient(150deg,'+p[0]+','+p[1]+')';}
+
+  var cards = []; // flat list of {el,row,idx} for navigation
+  var rowsData = [];
+
+  function esc(s){return (s==null?'':String(s)).replace(/[&<>"]/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  function buildCard(item){
+    var btn = document.createElement('button');
+    btn.className='card';
+    var yr = item.year ? '<span class="badge">'+esc(item.year)+'</span>' : '';
+    btn.innerHTML =
+      '<div class="thumb" style="background:'+grad(item.title||'x')+'">'+yr+
+        '<div class="play">&#9654;</div>'+
+        '<div class="t">'+esc(item.title||'Untitled')+'</div>'+
+      '</div>'+
+      '<div class="meta">'+esc(item.license||'Public domain')+'</div>';
+    btn.addEventListener('click',function(){ play(item); });
+    return btn;
+  }
+
+  function render(feed){
+    var cats = (feed && feed.categories) || [];
+    var total = 0;
+    rowsEl.innerHTML='';
+    cards = []; rowsData = [];
+    cats.forEach(function(cat){
+      var items = (cat.items||[]).filter(function(it){return it && it.streamUrl;});
+      if(!items.length) return;
+      total += items.length;
+      var row = document.createElement('section'); row.className='row';
+      var h = document.createElement('h2'); h.textContent = cat.title || 'Shorts'; row.appendChild(h);
+      var strip = document.createElement('div'); strip.className='strip';
+      var rowIndex = rowsData.length;
+      var rowCards = [];
+      items.forEach(function(it){
+        var c = buildCard(it);
+        c.dataset.row = rowIndex; c.dataset.col = rowCards.length;
+        strip.appendChild(c);
+        rowCards.push(c);
+      });
+      row.appendChild(strip);
+      rowsEl.appendChild(row);
+      rowsData.push(rowCards);
+    });
+    countEl.innerHTML = (cats.length)+' categories<br>'+total+' free films';
+    statusEl.classList.add('hide');
+    // focus first card
+    if(rowsData[0] && rowsData[0][0]) focusCard(0,0);
+  }
+
+  var cur = {r:0,c:0};
+  function focusCard(r,c){
+    if(!rowsData[r]) return;
+    c = Math.max(0, Math.min(c, rowsData[r].length-1));
+    cur.r=r; cur.c=c;
+    var el = rowsData[r][c];
+    if(el){ el.focus(); el.scrollIntoView({block:'nearest',inline:'center'}); }
+  }
+
+  function move(dr,dc){
+    var r=cur.r, c=cur.c;
+    if(dr!==0){ r=Math.max(0,Math.min(rowsData.length-1, r+dr));
+      c=Math.min(c, (rowsData[r]?rowsData[r].length-1:0)); }
+    if(dc!==0){ c=c+dc;
+      if(c<0){c=0;} if(rowsData[r]&&c>rowsData[r].length-1){c=rowsData[r].length-1;} }
+    focusCard(r,c);
+  }
+
+  function play(item){
+    ptEl.textContent = item.title||'';
+    psEl.textContent = (item.year? item.year+'  ·  ':'') + (item.license||'') +
+      (item.description? '   —   '+item.description : '');
+    videoEl.src = item.streamUrl;
+    playerEl.classList.add('show');
+    var p = videoEl.play(); if(p&&p.catch)p.catch(function(){});
+    videoEl.focus();
+  }
+  function closePlayer(){
+    playerEl.classList.remove('show');
+    try{videoEl.pause();}catch(e){}
+    videoEl.removeAttribute('src'); videoEl.load();
+    focusCard(cur.r,cur.c);
+  }
+  document.getElementById('pback').addEventListener('click',closePlayer);
+  videoEl.addEventListener('ended',closePlayer);
+
+  // remote / keyboard navigation (LG magic remote sends arrows, Enter, Back=461/Escape)
+  document.addEventListener('keydown',function(e){
+    var k=e.keyCode, key=e.key;
+    var playerOpen = playerEl.classList.contains('show');
+    // Back / Escape
+    if(k===461 || k===27 || k===8 || key==='GoBack' || key==='Backspace' || key==='Escape'){
+      if(playerOpen){ e.preventDefault(); closePlayer(); }
+      return;
+    }
+    if(playerOpen) return; // let the video controls handle the rest
+    if(key==='ArrowRight'||k===39){ e.preventDefault(); move(0,1); }
+    else if(key==='ArrowLeft'||k===37){ e.preventDefault(); move(0,-1); }
+    else if(key==='ArrowDown'||k===40){ e.preventDefault(); move(1,0); }
+    else if(key==='ArrowUp'||k===38){ e.preventDefault(); move(-1,0); }
+    else if(key==='Enter'||k===13){ var el=rowsData[cur.r]&&rowsData[cur.r][cur.c]; if(el){e.preventDefault();el.click();} }
+  });
+
+  function load(){
+    statusEl.classList.remove('hide');
+    statusText.innerHTML='Loading the vault&hellip;';
+    fetch(FEED_URL,{cache:'no-store'})
+      .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+      .then(render)
+      .catch(function(err){
+        statusText.innerHTML='Could not load the film library.<br><small style="color:#6f6a62">'+
+          esc(err.message)+'</small><br><br>'+
+          '<button id="retry" style="background:#c0392b;color:#fff;border:none;padding:10px 20px;'+
+          'border-radius:8px;font-size:14px;cursor:pointer">Try again</button>';
+        var rb=document.getElementById('retry'); if(rb) rb.addEventListener('click',load);
+      });
+  }
+  load();
+})();
+</script>
+</body>
+</html>
