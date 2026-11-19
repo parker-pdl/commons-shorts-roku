@@ -1,8 +1,158 @@
 {
   "providerName": "Commons Shorts by: ParkerDataLink.com",
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-11-18",
   "language": "en",
   "categories": [
+    {
+      "title": "Top 5 Classic Horror",
+      "items": [
+        {
+          "id": "night-of-the-living-dead-1968-hw",
+          "title": "#1 Night of the Living Dead",
+          "year": "1968",
+          "description": "A group of strangers barricade themselves inside a farmhouse as the dead rise outside.",
+          "poster": "https://pub-3ece269d2dd44298a19cc5f5355f7802.r2.dev/posters/night-of-the-living-dead-1968.jpg",
+          "streamUrl": "https://archive.org/download/NightOfTheLivingDead1968-Restored/Notld1968Restoration-desktop.mp4",
+          "streamFormat": "mp4"
+        },
+        {
+          "id": "carnival-of-souls-1962-hw",
+          "title": "#2 Carnival of Souls",
+          "year": "1962",
+          "description": "A woman survives a car crash but becomes drawn to a mysterious abandoned pavilion.",
+          "poster": "https://pub-3ece269d2dd44298a19cc5f5355f7802.r2.dev/posters/carnival-of-souls-1962.jpg",
+          "streamUrl": "https://archive.org/download/carnival_of_souls/carnival_of_souls.mp4",
+          "streamFormat": "mp4"
+        },
+        {
+          "id": "house-on-haunted-hill-1959-hw",
+          "title": "#3 House on Haunted Hill",
+          "year": "1959",
+          "description": "Vincent Price invites guests to a haunted mansion for a deadly night of terror.",
+          "poster": "https://pub-3ece269d2dd44298a19cc5f5355f7802.r2.dev/posters/house-on-haunted-hill-1959.jpg",
+          "streamUrl": "https://archive.org/download/HouseOnHauntedHill1959/House-On-Haunted-Hill.mp4",
+          "streamFormat": "mp4"
+        },
+        {
+          "id": "nosferatu-1922-hw",
+          "title": "#4 Nosferatu",
+          "year": "1922",
+          "description": "The silent vampire classic that defined the look of cinematic horror.",
+          "poster": "https://pub-3ece269d2dd44298a19cc5f5355f7802.r2.dev/posters/nosferatu-1922.jpg",
+          "streamUrl": "https://archive.org/download/Nosferatu1922/Nosferatu.mp4",
+          "streamFormat": "mp4"
+        },
+        {
+          "id": "pixilated-nightmare-2012",
+          "title": "Pixilated Nightmare",
+          "year": "2012",
+          "description": "A short pixilation film created as a time-based media class project.",
+          "poster": "https://pub-3ece269d2dd44298a19cc5f5355f7802.r2.dev/pixilated-nightmare-2012.jpg",
+          "streamUrl": "https://pub-4a1ee3e926844caba75e0b33d0b2208d.r2.dev/Pixilated_Nightmare.mp4",
+          "streamFormat": "mp4"
+        }
+      ]
+    },
+    {
+      "title": "Top 5 Short Animated Horror and Scifi",
+      "items": [
+        {
+          "id": "other-lily-2015",
+          "title": "Other Lily",
+          "year": "2015",
+          "description": "Lily suffers from sleep paralysis that may have horrific implications on her waking life.",
+          "poster": "https://pub-3ece269d2dd44298a19cc5f5355f7802.r2.dev/other-lily-2015.jpg",
+          "streamUrl": "https://pub-4a1ee3e926844caba75e0b33d0b2208d.r2.dev/Other_Lily_2015.mp4",
+          "streamFormat": "mp4"
+        },
+        {
+          "id": "the-nightmare-2013",
+          "title": "The Nightmare",
+          "year": "2013",
+          "description": "A rogue elf maiden seeks to destroy the monster that lurks in the woods, but for what purpose?",
+          "poster": "https://pub-3ece269d2dd44298a19cc5f5355f7802.r2.dev/the-nightmare-2013.jpg",
+          "streamUrl": "https://pub-4a1ee3e926844caba75e0b33d0b2208d.r2.dev/David_Romero_-_Nightmare%2C_The_%282013%29.mp4",
+          "streamFormat": "mp4"
+        },
+        {
+          "id": "spider-vs-living-dead-2019",
+          "title": "Spider vs. the Living Dead",
+          "year": "2019",
+          "description": "A Halloween creature-feature short about a battle between two terrifying, flesh-craving beasts.",
+          "poster": "https://pub-3ece269d2dd44298a19cc5f5355f7802.r2.dev/spider-vs-living-dead-2019.jpg",
+          "streamUrl": "https://pub-4a1ee3e926844caba75e0b33d0b2208d.r2.dev/Spider_vs._the_Living_Dead.mp4",
+          "streamFormat": "mp4"
+        },
+        {
+          "id": "there-is-no-antimemetics-2024",
+          "title": "There Is No Antimemetics Division",
+          "year": "2024",
+          "description": "Three individuals attempt to reconcile fractured memories and incomplete observations regarding something that is simultaneously known and unknowable.",
+          "poster": "https://pub-3ece269d2dd44298a19cc5f5355f7802.r2.dev/there-is-no-antimemetics-2024.jpg",
+          "streamUrl": "https://pub-4a1ee3e926844caba75e0b33d0b2208d.r2.dev/antimemetics/antimemetics.m3u8",
+          "streamFormat": "hls"
+        },
+        {
+          "id": "backrooms-level-1-2022",
+          "title": "The Backrooms - Level 1: Habitable Zone",
+          "year": "2022",
+          "description": "Found-footage horror set in Level 1 of the Backrooms, the Habitable Zone.",
+          "poster": "https://pub-3ece269d2dd44298a19cc5f5355f7802.r2.dev/backrooms-level-1-2022.jpg",
+          "streamUrl": "https://pub-4a1ee3e926844caba75e0b33d0b2208d.r2.dev/The-Backrooms-Level-1-_Found-Footage.mp4",
+          "streamFormat": "mp4"
+        }
+      ]
+    },
+    {
+      "title": "Top 5 Classic Cartoons",
+      "items": [
+        {
+          "id": "channel-3-fleischer-superman-wartime-toons-superman-the-mad-scientist-1941",
+          "title": "Superman: The Mad Scientist",
+          "year": 1941,
+          "description": "Fleischer/Famous Studios — Superman short, 1941.",
+          "streamUrl": "https://archive.org/download/superman-the-complete-collection-fleischerfamous-studios/Superman%20E01%20-%20The%20Mad%20Scientist%20%281941%29.mp4",
+          "streamFormat": "mp4",
+          "license": "Public Domain (Very High confidence)"
+        },
+        {
+          "id": "channel-1-van-beuren-classics-magic-boots-1922",
+          "title": "Magic Boots",
+          "year": 1922,
+          "description": "Van Beuren Studios short, 1922.",
+          "streamUrl": "https://archive.org/download/All-Van-Beuren-Cartoons-Found-So-Far-1921-to-1936/22.02.01%20Magic%20Boots.mp4",
+          "streamFormat": "mp4",
+          "license": "Public Domain (High confidence — studio catalog lapsed)"
+        },
+        {
+          "id": "channel-1-van-beuren-classics-tom-and-jerry-pencil-mania-1932",
+          "title": "Tom and Jerry: Pencil Mania",
+          "year": 1932,
+          "description": "Van Beuren Studios short, 1932.",
+          "streamUrl": "https://archive.org/download/van-beuren-1932-tom-and-jerry-pencil-mania/Van%20Beuren%201932%20Tom%20and%20Jerry%20-Pencil_Mania.mp4",
+          "streamFormat": "mp4",
+          "license": "Public Domain (High confidence — studio catalog lapsed)"
+        },
+        {
+          "id": "channel-1-van-beuren-classics-tom-and-jerry-wot-a-night-1932",
+          "title": "Tom and Jerry: Wot a Night",
+          "year": 1932,
+          "description": "Van Beuren Studios short, 1932.",
+          "streamUrl": "https://archive.org/download/TomAndJerryWotANight/WotANight.mp4",
+          "streamFormat": "mp4",
+          "license": "Public Domain (High confidence — studio catalog lapsed)"
+        },
+        {
+          "id": "popeye-the-sailor-ancient-fistory-1953",
+          "title": "Ancient Fistory",
+          "year": 1953,
+          "description": "An elderly Popeye and Bluto recall their rivalry in flashback.",
+          "streamUrl": "https://archive.org/download/popeyethesailor-publicdomain/Ancient%20Fistory%20%281953%29.mp4",
+          "streamFormat": "mp4",
+          "license": "Public Domain"
+        }
+      ]
+    },
     {
       "title": "Horror Shorts",
       "items": [
